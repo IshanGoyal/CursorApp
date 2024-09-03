@@ -4,3 +4,4 @@
 npm i
 npm start
 ```
+# CursorApp
