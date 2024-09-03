@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
+import CursorYukiAppVideo from './Assets/CursorYukiApp(Video1).mp4';
 
 function App() {
   const [showPopup, setShowPopup] = useState(false);
   const [huskyPhotos, setHuskyPhotos] = useState([]);
   const [popupPosition, setPopupPosition] = useState({ top: '50%', left: '50%' });
+  const [showVideo, setShowVideo] = useState(false);
 
   useEffect(() => {
     document.title = 'Yuki App';
@@ -30,6 +32,14 @@ function App() {
 
   const handleClosePopup = () => {
     setShowPopup(false);
+  };
+
+  const handleVideoClick = () => {
+    setShowVideo(true);
+  };
+
+  const handleCloseVideo = () => {
+    setShowVideo(false);
   };
 
   return (
@@ -135,6 +145,30 @@ function App() {
           ))}
         </div>
       </div>
+      <div style={{ 
+        width: '80%', 
+        maxWidth: '600px', 
+        backgroundColor: 'white', 
+        padding: '20px', 
+        borderRadius: '10px',
+        boxShadow: '0 0 10px rgba(0,0,0,0.1)',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        margin: '20px auto'
+      }}>
+        <button 
+          onClick={handleVideoClick}
+          style={{
+            backgroundColor: 'white',
+            border: '2px solid #4B0082',
+            padding: '10px 20px',
+            cursor: 'pointer'
+          }}
+        >
+          <span style={{ color: 'purple' }}>Watch a video of me putting this together</span>
+        </button>
+      </div>
       {showPopup && (
         <div style={{
           position: 'fixed',
@@ -149,6 +183,25 @@ function App() {
         }}>
           <p>BOOP!</p>
           <button onClick={handleClosePopup}>Close</button>
+        </div>
+      )}
+      {showVideo && (
+        <div style={{
+          position: 'fixed',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          backgroundColor: 'white',
+          padding: '20px',
+          border: '2px solid #4B0082',
+          zIndex: 1000,
+          color: 'purple'
+        }}>
+          <video width="640" height="480" controls>
+            <source src={CursorYukiAppVideo} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <button onClick={handleCloseVideo} style={{ marginTop: '10px' }}>Close</button>
         </div>
       )}
       <footer style={{
